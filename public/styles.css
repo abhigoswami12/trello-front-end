@@ -23429,6 +23429,24 @@ video {
   top: 2%;
 }
 
+/* dashboard */
+
+.db-bg {
+  background: #fafbfc;
+}
+
+.db-color {
+  color: #7fb1d9;
+}
+
+.db-light-bg {
+  background: #e4f0f6;
+}
+
+.trello-color {
+  color: #2e6ba8;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
