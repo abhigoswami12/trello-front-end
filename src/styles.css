@@ -1,0 +1,54 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.bg-dark-green {
+  background: #458231;
+}
+.bg-light-green {
+  background: #529839;
+}
+.trello-icon {
+  background-image: url(https://a.trellocdn.com/prgb/dist/images/header-loading-logo.d73159084f5122775d4d.gif);
+  background-size: 18px 18px;
+  display: inline-block;
+  opacity: 0;
+  height: 18px;
+  right: 59px;
+  position: absolute;
+  top: 6px;
+  width: 18px;
+}
+
+/* Landing page */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.btn {
+  color: white;
+  padding: 0.5rem 1rem;
+  background: #458231;
+  cursor: pointer;
+  outline: none;
+}
+.pos-sticky {
+  position: sticky;
+  top: 2%;
+}
+
+/* dashboard */
+.db-bg {
+  background: #fafbfc;
+}
+.db-color {
+  color: #7fb1d9;
+}
+.db-light-bg {
+  background: #e4f0f6;
+}
+.trello-color {
+  color: #2e6ba8;
+}
