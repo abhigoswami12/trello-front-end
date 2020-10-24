@@ -1,6 +1,6 @@
 import React from "react";
 
-function ShowBoardHeader() {
+function ShowBoardHeader({ board }) {
   return (
     <div>
       <nav className="bg-light-green">
@@ -14,7 +14,7 @@ function ShowBoardHeader() {
                     className="px-3 py-2 hover:bg-green-800 rounded-md"
                   >
                     <span className="text-lg font-bold text-gray-300">
-                      Project Managment
+                      {board?.name}
                     </span>
                   </a>
 
@@ -48,7 +48,9 @@ function ShowBoardHeader() {
                     href="#"
                     className="ml-1 px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white bg-green-800 focus:outline-none focus:text-white focus:bg-gray-700"
                   >
-                    <span className="tracking-wider">altcampus</span>
+                    <span className="tracking-wider">
+                      {board?.teamId?.name}
+                    </span>
                   </a>
                 </div>
               </div>

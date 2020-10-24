@@ -52,3 +52,19 @@
 .trello-color {
   color: #2e6ba8;
 }
+
+/* login password */
+.eye-pos {
+  position: absolute;
+  top: 29%;
+  right: 5%;
+}
+
+/* list  */
+.list-container {
+  min-width: 256px;
+}
+.active-menu {
+  background: #e4f0f5;
+  color: #0179bf;
+}

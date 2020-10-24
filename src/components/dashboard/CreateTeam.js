@@ -1,6 +1,38 @@
+import { useFormik } from "formik";
 import React from "react";
+import { validateTeam } from "../../utils/validateLogic";
+import axios from "axios";
 
-function CreateTeam() {
+function CreateTeam({ closeTeamDialog, addNewTeam }) {
+  const {
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+    touched,
+    isSubmitting,
+  } = useFormik({
+    initialValues: {
+      name: "",
+      description: "",
+    },
+    validate: validateTeam,
+    onSubmit: (values, actions) => {
+      axios({
+        method: "POST",
+        url: "/api/v1/teams",
+        data: {
+          team: values,
+        },
+      }).then((res) => {
+        let { team } = res.data;
+        addNewTeam(team);
+        closeTeamDialog();
+      });
+    },
+  });
+
   return (
     <>
       <section>
@@ -16,18 +48,24 @@ function CreateTeam() {
               </p>
             </div>
             <div>
-              <form action="">
+              <form onSubmit={handleSubmit}>
                 <div>
-                  <label htmlFor="" className="font-bold text-gray-900">
+                  <label htmlFor="name" className="font-bold text-gray-900">
                     Team's Name
                   </label>
                   <input
                     type="text"
                     name="name"
-                    id=""
+                    id="name"
                     placeholder="Taco's co"
                     className="border-2 border-gray-400 w-full px-2 py-2 rounded font-lg mb-5"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.name}
                   />
+                  <small>
+                    {errors && errors.name && touched.name && errors.name}
+                  </small>
                 </div>
                 <div>
                   <label htmlFor="" className="font-bold text-gray-900">
@@ -40,6 +78,9 @@ function CreateTeam() {
                     rows="5"
                     placholder="Write Something"
                     className="border-2 border-gray-400 w-full px-2 py-2 rounded font-lg mb-5"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.description}
                   ></textarea>
                 </div>
                 <div>
@@ -72,3 +113,5 @@ function CreateTeam() {
 }
 
 export default CreateTeam;
+
+// INstead of formik do it on your own

@@ -5,7 +5,7 @@ import VisuallyHidden from "@reach/visually-hidden";
 import "@reach/dialog/styles.css";
 import CardDetails from "./CardDetails";
 
-function ShowCard() {
+function ShowCard({ card }) {
   const [showDialog, setShowDialog] = React.useState(false);
   const open = () => setShowDialog(true);
   const close = () => setShowDialog(false);
@@ -16,9 +16,7 @@ function ShowCard() {
         className="bg-white mx-3 my-3 px-2 py-1 rounded shadow cursor-pointer hover:bg-gray-200"
         onClick={open}
       >
-        <p className="text-gray-800">
-          How can I get access to the super secret document?
-        </p>
+        <p className="text-gray-800">{card.name}</p>
       </div>
 
       <Dialog isOpen={showDialog} onDismiss={close}>
@@ -26,7 +24,7 @@ function ShowCard() {
           <VisuallyHidden>Close</VisuallyHidden>
           <span aria-hidden>×</span>
         </button>
-        <CardDetails />
+        <CardDetails card={card} />
       </Dialog>
     </>
   );

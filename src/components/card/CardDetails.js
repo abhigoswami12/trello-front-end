@@ -1,6 +1,6 @@
 import React from "react";
 
-function CardDetails() {
+function CardDetails({ card }) {
   return (
     <section className="font-nunito db-bg">
       <div>
@@ -20,13 +20,13 @@ function CardDetails() {
             />
           </svg>
           <h2 className="font-bold text-xl pb-2 text-gray-800 ml-2">
-            Who's the best person to fix my HTML snag?
+            {card.name}
           </h2>
         </div>
         <p className="text-gray-700 tracking-wide text-sm pb-3">
           in list{" "}
           <a href="" className="underline">
-            Questions For Next Meeting
+            {card.listId.name}
           </a>
         </p>
       </div>

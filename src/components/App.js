@@ -1,33 +1,78 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "./header/Header";
-import ShowBoard from "./ShowBoard";
+import ShowBoard from "./board/ShowBoard";
 import LandingPage from "./landingPage/LandingPage";
-import Login from "./Login";
-import Signup from "./Signup";
-import Dashboard from "./Dashboard";
+import Login from "./login/Login";
+import Signup from "./signup/Signup";
+import Dashboard from "./dashboard/Dashboard";
+import { useState } from "react";
+import UserContext from "../components/Context/UserContext";
+import { useEffect } from "react";
 
 function App() {
+  let [user, setUser] = useState(null);
+
+  useEffect(() => {
+    console.log("render in App.js useEffect");
+    fetch("/api/v1/user/me")
+      .then((res) => res.json())
+      .then(({ user }) => setUser(user));
+  }, []);
+
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/board">
-          <ShowBoard />
-        </Route>
-        <Route path="/" exact>
-          <LandingPage />
-        </Route>
-        <Route path="/signup">
-          <Signup />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
-      </Switch>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Header />
+        {user ? <PrivateRoute /> : <PublicRoute />}
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }
+
+function PublicRoute() {
+  return (
+    <Switch>
+      <Route path="/" exact>
+        <LandingPage />
+      </Route>
+      <Route path="/signup" exact>
+        <Signup />
+      </Route>
+      <Route path="/login" exact>
+        <Login />
+      </Route>
+      <Route component={FourOFour}></Route>
+    </Switch>
+  );
+}
+
+function PrivateRoute() {
+  return (
+    <Switch>
+      <Route path="/" exact>
+        <LandingPage />
+      </Route>
+      <Route path="/signup" exact>
+        <Signup />
+      </Route>
+      <Route path="/login" exact>
+        <Login />
+      </Route>
+      <Route path="/boards/:boardId" exact>
+        <ShowBoard />
+      </Route>
+
+      <Route path="/dashboard" exact>
+        <Dashboard />
+      </Route>
+      <Route component={FourOFour}></Route>
+    </Switch>
+  );
+}
+function FourOFour() {
+  return <h1>Page Not Found</h1>;
+}
 export default App;
+
+// remove login signup and landing page from privateRoute
