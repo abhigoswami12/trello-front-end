@@ -1,6 +1,21 @@
+import Axios from "axios";
 import React from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function ShowBoardHeader({ board }) {
+  let history = useHistory();
+  function handleDeleteBoard() {
+    console.log(history, "HISTORY");
+    let url = `http:3000/api/v1/boards/${board._id}`;
+    axios({
+      method: "DELETE",
+      url: `/api/v1/boards/${board._id}`,
+    }).then((res) => {
+      console.log(res);
+      history.push("/dashboard");
+    });
+  }
   return (
     <div>
       <nav className="bg-light-green">
@@ -56,9 +71,13 @@ function ShowBoardHeader({ board }) {
               </div>
             </div>
             <div className="hidden md:block">
-              <div className="rounded-md px-3 flex items-center ml-4  md:ml-6 text-gray-300 hover:text-white hover:bg-green-800 focus:outline-none focus:text-white focus:bg-gray-700 py-2">
+              <div
+                onClick={handleDeleteBoard}
+                className="cursor-pointer rounded-md px-3 flex items-center ml-4  md:ml-6 text-gray-300 hover:text-white hover:bg-green-800 focus:outline-none focus:text-white focus:bg-gray-700 py-2"
+              >
+                <span>Delete Board</span>
                 <svg
-                  className=" w-4 h-4 mr-1"
+                  className="w-4 h-4 ml-2"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -68,10 +87,9 @@ function ShowBoardHeader({ board }) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                   />
                 </svg>
-                <span>Show Menu</span>
               </div>
             </div>
           </div>

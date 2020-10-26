@@ -60,6 +60,7 @@ function Dashboard() {
             <Sidebar
               openTeamDialog={openTeamDialog}
               teams={teams}
+              setTeams={setTeams}
               isDataFetching={isDataFetching}
               activeTeam={activeTeam}
               setActiveTeam={setActiveTeam}

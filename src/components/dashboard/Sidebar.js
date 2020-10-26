@@ -12,6 +12,7 @@ function Sidebar({
   openTeamDialog,
   isDataFetching,
   teams,
+  setTeams,
 }) {
   //   let [teams, setTeams] = useState(null);
   //   let [isDataFetching, setIsDataFetching] = useState(false);
@@ -70,6 +71,7 @@ function Sidebar({
                 isDataFetching={isDataFetching}
                 team={team}
                 teams={teams}
+                setTeams={setTeams}
                 activeTeam={activeTeam}
                 setActiveTeam={setActiveTeam}
               />

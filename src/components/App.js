@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Header from "./header/Header";
 import ShowBoard from "./board/ShowBoard";
 import LandingPage from "./landingPage/LandingPage";
@@ -51,21 +51,15 @@ function PrivateRoute() {
   return (
     <Switch>
       <Route path="/" exact>
-        <LandingPage />
+        <Redirect to="/dashboard" />
       </Route>
-      <Route path="/signup" exact>
-        <Signup />
-      </Route>
-      <Route path="/login" exact>
-        <Login />
+      <Route path="/dashboard" exact>
+        <Dashboard />
       </Route>
       <Route path="/boards/:boardId" exact>
         <ShowBoard />
       </Route>
 
-      <Route path="/dashboard" exact>
-        <Dashboard />
-      </Route>
       <Route component={FourOFour}></Route>
     </Switch>
   );

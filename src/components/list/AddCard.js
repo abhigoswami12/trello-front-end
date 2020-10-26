@@ -21,7 +21,7 @@ function AddCard({ list, addNewCard }) {
     },
     validate: validateCard,
     onSubmit: (values, actions) => {
-      // console.log("Form Submitted");
+      // console.log(list, "List in add card");
       axios({
         method: "POST",
         url: "/api/v1/cards",
@@ -29,6 +29,7 @@ function AddCard({ list, addNewCard }) {
           card: {
             name: values.name,
             listId: list._id,
+            boardId: list.boardId,
           },
         },
       })
