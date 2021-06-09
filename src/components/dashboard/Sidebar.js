@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import ShowTeamsList from "./ShowTeamsList";
 import { useState } from "react";
 
+// axios.defaults.withCredentials = true;
+
 function Sidebar({
   activeTeam,
   setActiveTeam,

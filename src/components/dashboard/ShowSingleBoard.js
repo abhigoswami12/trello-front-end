@@ -1,7 +1,8 @@
-import Axios from "axios";
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
+
+// axios.defaults.withCredentials = true;
 
 function ShowSingleBoard({ openBoardDialog, board, team }) {
   //   let [board, setBoard] = useState(null);

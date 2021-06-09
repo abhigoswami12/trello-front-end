@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     console.log("render in App.js useEffect");
-    fetch("/api/v1/user/me")
+    fetch("https://desolate-anchorage-67445.herokuapp.com/api/v1/user/me")
       .then((res) => res.json())
       .then(({ user }) => setUser(user));
   }, []);

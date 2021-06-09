@@ -6,6 +6,8 @@ import { useContext } from "react";
 import UserContext from "../Context/UserContext";
 import userEvent from "@testing-library/user-event";
 
+// axios.defaults.withCredentials = true;
+
 function ShowTeamsList({
   isDataFetching,
   team,
@@ -31,7 +33,7 @@ function ShowTeamsList({
     let teamId = team._id;
     axios({
       method: "DELETE",
-      url: `/api/v1/teams/${team._id}`,
+      url: `https://desolate-anchorage-67445.herokuapp.com/api/v1/teams/${team._id}`,
     })
       .then((res) => {
         let newTeams = teams?.filter((team) => team._id !== teamId);

@@ -8,6 +8,8 @@ import { useContext } from "react";
 import UserContext from "../Context/UserContext";
 import { Link, useHistory } from "react-router-dom";
 
+// axios.defaults.withCredentials = true;
+
 function CreateBoard({ teams, team, closeBoardDialog, addNewBoard }) {
   let [isTeamOptionsOpen, setIsTeamOptionsOpen] = useState(false);
   // let [teamName, setTeamName] = useState(null);
@@ -34,7 +36,7 @@ function CreateBoard({ teams, team, closeBoardDialog, addNewBoard }) {
     onSubmit: (values, actions) => {
       axios({
         method: "POST",
-        url: "/api/v1/boards",
+        url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/boards",
         data: {
           board: {
             name: values.name,

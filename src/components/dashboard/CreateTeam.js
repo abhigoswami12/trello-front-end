@@ -3,6 +3,8 @@ import React from "react";
 import { validateTeam } from "../../utils/validateLogic";
 import axios from "axios";
 
+// axios.defaults.withCredentials = true;
+
 function CreateTeam({ closeTeamDialog, addNewTeam }) {
   const {
     values,
@@ -21,7 +23,7 @@ function CreateTeam({ closeTeamDialog, addNewTeam }) {
     onSubmit: (values, actions) => {
       axios({
         method: "POST",
-        url: "/api/v1/teams",
+        url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/teams",
         data: {
           team: values,
         },

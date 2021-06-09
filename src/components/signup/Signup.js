@@ -7,6 +7,8 @@ import { useState } from "react";
 import HidePassword from "../PasswordIcons/HidePassword";
 import ShowPassword from "../PasswordIcons/ShowPassword";
 
+// axios.defaults.withCredentials = true;
+
 function Signup() {
   let [showPassword, setShowPassword] = useState(false);
   let [authErr, setAuthErr] = useState("");
@@ -29,7 +31,7 @@ function Signup() {
     onSubmit: (values, actions) => {
       axios({
         method: "POST",
-        url: "/api/v1/users/signup",
+        url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/users/signup",
         data: {
           user: values,
         },

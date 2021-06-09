@@ -12,6 +12,8 @@ import ShowTeamsBoards from "./ShowTeamsBoards";
 import UserContext from "../Context/UserContext";
 // import UserContext from "./Context/UserContext";
 
+// axios.defaults.withCredentials = true;
+
 function Dashboard() {
   // let context = useContext(UserContext);
   // console.log(context, "CONTEXT IN DASHBOARD");
@@ -26,7 +28,7 @@ function Dashboard() {
   useEffect(() => {
     setIsDataFetching(true);
     axios
-      .get("/api/v1/teams")
+      .get("https://desolate-anchorage-67445.herokuapp.com/api/v1/teams")
       .then((res) => {
         let { teams } = res.data;
         setTeams(teams);

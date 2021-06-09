@@ -7,6 +7,8 @@ import axios from "axios";
 import useOnClickOutside from "../../hooks/UseOnClickOutside";
 import UserContext from "../Context/UserContext";
 
+// axios.defaults.withCredentials = true;
+
 function HeaderAfterLogin() {
   let [dropDown, setDropDown] = useState(false);
 
@@ -156,7 +158,7 @@ function DropDown() {
 
   function handleLogout() {
     axios
-      .get("/api/v1/users/logout")
+      .get("https://desolate-anchorage-67445.herokuapp.com/api/v1/users/logout")
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
   }

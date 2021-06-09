@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { validateList } from "../../utils/validateLogic";
 
+// axios.defaults.withCredentials = true;
+
 function AddList({ board, addNewList }) {
   let [addList, setAddList] = useState(false);
   // let [list, setList] = useState(null);
@@ -23,7 +25,7 @@ function AddList({ board, addNewList }) {
     onSubmit: (values, actions) => {
       axios({
         method: "POST",
-        url: "/api/v1/lists",
+        url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/lists",
         data: {
           list: {
             name: values.name,

@@ -8,18 +8,24 @@ import { useEffect } from "react";
 import axios from "axios";
 import AddList from "./AddList";
 
+// axios.defaults.withCredentials = true;
+
 function ShowBoard() {
   let [board, setBoard] = useState(null);
   console.log(board);
   let params = useParams();
   console.log(params);
   useEffect(() => {
-    axios.get(`/api/v1/boards/${params.boardId}`).then((res) => {
-      let { board } = res.data;
-      console.log(board, "BOARD");
+    axios
+      .get(
+        `https://desolate-anchorage-67445.herokuapp.com/api/v1/boards/${params.boardId}`
+      )
+      .then((res) => {
+        let { board } = res.data;
+        console.log(board, "BOARD");
 
-      return setBoard(board);
-    });
+        return setBoard(board);
+      });
   }, []);
 
   function addNewList(list) {

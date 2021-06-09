@@ -6,6 +6,8 @@ import useOnClickOutside from "../../hooks/UseOnClickOutside";
 import AddCard from "./AddCard";
 import { useEffect } from "react";
 
+// axios.defaults.withCredentials = true;
+
 function ShowList({ list }) {
   let [editListTitle, setEditListTitle] = useState(false);
   let [cards, setCards] = useState([]);
@@ -21,7 +23,9 @@ function ShowList({ list }) {
   // Have not used this approach previously
   useEffect(() => {
     axios
-      .get(`/api/v1/cards/${list._id}/cards`)
+      .get(
+        `https://desolate-anchorage-67445.herokuapp.com/api/v1/cards/${list._id}/cards`
+      )
       .then((res) => {
         // console.log(res.data);
         let { cards } = res.data;

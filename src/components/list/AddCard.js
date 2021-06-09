@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { validateCard } from "../../utils/validateLogic";
 import axios from "axios";
 
+// axios.defaults.withCredentials = true;
+
 function AddCard({ list, addNewCard }) {
   let [addCard, setAddCard] = useState(false);
 
@@ -24,7 +26,7 @@ function AddCard({ list, addNewCard }) {
       // console.log(list, "List in add card");
       axios({
         method: "POST",
-        url: "/api/v1/cards",
+        url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/cards",
         data: {
           card: {
             name: values.name,
