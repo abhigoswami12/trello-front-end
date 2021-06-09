@@ -1,4 +1,3 @@
-import Axios from "axios";
 import React from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -10,9 +9,13 @@ function ShowBoardHeader({ board }) {
   function handleDeleteBoard() {
     console.log(history, "HISTORY");
     let url = `http:3000/api/v1/boards/${board._id}`;
+    console.log(board, "board");
     axios({
       method: "DELETE",
-      url: `https://desolate-anchorage-67445.herokuapp.com/api/v1/boards/${board._id}`,
+      url: `https://desolate-anchorage-67445.herokuapp.com/api/v1/boards/${board?._id}`,
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
     }).then((res) => {
       console.log(res);
       history.push("/dashboard");

@@ -18,7 +18,12 @@ function ShowBoard() {
   useEffect(() => {
     axios
       .get(
-        `https://desolate-anchorage-67445.herokuapp.com/api/v1/boards/${params.boardId}`
+        `https://desolate-anchorage-67445.herokuapp.com/api/v1/boards/${params.boardId}`,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
       )
       .then((res) => {
         let { board } = res.data;

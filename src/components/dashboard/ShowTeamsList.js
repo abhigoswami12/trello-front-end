@@ -34,6 +34,9 @@ function ShowTeamsList({
     axios({
       method: "DELETE",
       url: `https://desolate-anchorage-67445.herokuapp.com/api/v1/teams/${team._id}`,
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
     })
       .then((res) => {
         let newTeams = teams?.filter((team) => team._id !== teamId);

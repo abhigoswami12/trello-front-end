@@ -32,6 +32,9 @@ function Signup() {
       axios({
         method: "POST",
         url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/users/signup",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
         data: {
           user: values,
         },

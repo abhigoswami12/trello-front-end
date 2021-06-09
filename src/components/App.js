@@ -9,20 +9,36 @@ import Dashboard from "./dashboard/Dashboard";
 import { useState } from "react";
 import UserContext from "../components/Context/UserContext";
 import { useEffect } from "react";
+import { setAuthHeaders } from "../apis/axios";
+import PageLoader from "./PageLoader";
 
 function App() {
-  let [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
+  const [isAuthComplete, setIsAuthComplete] = useState(true);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     console.log("render in App.js useEffect");
-    fetch("https://desolate-anchorage-67445.herokuapp.com/api/v1/user/me")
+    setIsAuthComplete(false);
+    fetch("https://desolate-anchorage-67445.herokuapp.com/api/v1/user/me", {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    })
       .then((res) => res.json())
-      .then(({ user }) => setUser(user));
+      .then(({ user }) => {
+        setUser(user);
+        setIsAuthComplete(true);
+      });
   }, []);
+
+  if (!isAuthComplete) {
+    return <PageLoader />;
+  }
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser, token, setToken }}>
         <Header />
         {user ? <PrivateRoute /> : <PublicRoute />}
       </UserContext.Provider>
@@ -65,8 +81,12 @@ function PrivateRoute() {
   );
 }
 function FourOFour() {
-  return <h1>Page Not Found</h1>;
+  return (
+    <div className="flex flex-row items-center justify-center w-screen h-screen">
+      <h1 className="text-2xl font-semibold leading-5 text-red-600">
+        Page Not Found !!
+      </h1>
+    </div>
+  );
 }
 export default App;
-
-// remove login signup and landing page from privateRoute

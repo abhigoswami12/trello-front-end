@@ -37,6 +37,9 @@ function CreateBoard({ teams, team, closeBoardDialog, addNewBoard }) {
       axios({
         method: "POST",
         url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/boards",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
         data: {
           board: {
             name: values.name,

@@ -24,6 +24,9 @@ function CreateTeam({ closeTeamDialog, addNewTeam }) {
       axios({
         method: "POST",
         url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/teams",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
         data: {
           team: values,
         },

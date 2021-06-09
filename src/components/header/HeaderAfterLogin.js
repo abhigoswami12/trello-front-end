@@ -23,9 +23,9 @@ function HeaderAfterLogin() {
             <div className="flex items-center">
               <div className="hidden md:block">
                 <div className=" flex items-center justify-center text-white">
-                  <a
-                    href="#"
+                  <Link
                     className="px-3 py-2 hover:bg-green-800 rounded-md"
+                    to="/"
                   >
                     <svg
                       className="w-6 h-6 opacity-75 "
@@ -41,10 +41,10 @@ function HeaderAfterLogin() {
                         d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                       />
                     </svg>
-                  </a>
+                  </Link>
                   <a
                     href="#"
-                    className="flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-green-800 focus:outline-none focus:text-white focus:bg-gray-700"
+                    className="flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-green-800 focus:outline-none focus:text-white focus:bg-gray-700 pointer-events-none"
                   >
                     <svg
                       width="24"
@@ -68,7 +68,7 @@ function HeaderAfterLogin() {
             <div className="hidden md:block">
               <div className="ml-4 flex items-center md:ml-6">
                 <button
-                  className="p-1 border-2 border-transparent text-gray-400 rounded-full hover:bg-green-800 focus:outline-none focus:text-white focus:bg-gray-700"
+                  className="p-1 border-2 border-transparent text-gray-400 rounded-full hover:bg-green-800 focus:outline-none focus:text-white focus:bg-gray-700 pointer-events-none"
                   aria-label="Notifications"
                 >
                   <svg
@@ -158,8 +158,15 @@ function DropDown() {
 
   function handleLogout() {
     axios
-      .get("https://desolate-anchorage-67445.herokuapp.com/api/v1/users/logout")
-      .then((res) => console.log(res))
+      .get(
+        "https://desolate-anchorage-67445.herokuapp.com/api/v1/users/logout",
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
+      )
+      .then((res) => localStorage.setItem("token", null))
       .catch((error) => console.log(error));
   }
 
@@ -172,7 +179,7 @@ function DropDown() {
     >
       <a
         href="##"
-        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 pointer-events-none opacity-50"
         role="menuitem"
       >
         Your Profile
@@ -180,7 +187,7 @@ function DropDown() {
 
       <a
         href="#"
-        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 pointer-events-none opacity-50"
         role="menuitem"
       >
         Settings

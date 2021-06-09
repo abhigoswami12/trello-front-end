@@ -26,6 +26,9 @@ function AddList({ board, addNewList }) {
       axios({
         method: "POST",
         url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/lists",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
         data: {
           list: {
             name: values.name,

@@ -28,7 +28,11 @@ function Dashboard() {
   useEffect(() => {
     setIsDataFetching(true);
     axios
-      .get("https://desolate-anchorage-67445.herokuapp.com/api/v1/teams")
+      .get("https://desolate-anchorage-67445.herokuapp.com/api/v1/teams", {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         let { teams } = res.data;
         setTeams(teams);

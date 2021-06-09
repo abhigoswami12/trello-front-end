@@ -36,14 +36,19 @@ function Login() {
       axios({
         method: "POST",
         url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/users/login",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
         data: {
           user: values,
         },
       })
         .then((res) => {
+          console.log(res, "res++");
           let { user } = res.data;
           context.setUser(user);
           actions.setSubmitting(false);
+          localStorage.setItem("token", res.data.token);
           return history.push("/dashboard");
         })
         .catch((error) => {

@@ -13,6 +13,8 @@ function ShowList({ list }) {
   let [cards, setCards] = useState([]);
 
   let [isListMenuOpen, setIsListMenuOpen] = useState(false);
+  let [listName, setListName] = useState(list.name);
+  // let [showList, setShowList] = useState(list);
   // let [showListMenu, setShowListMenu] = use
   // console.log(list);
   // console.log(list._id);
@@ -24,7 +26,12 @@ function ShowList({ list }) {
   useEffect(() => {
     axios
       .get(
-        `https://desolate-anchorage-67445.herokuapp.com/api/v1/cards/${list._id}/cards`
+        `https://desolate-anchorage-67445.herokuapp.com/api/v1/cards/${list._id}/cards`,
+        {
+          headers: {
+            authorization: localStorage.getItem("token"),
+          },
+        }
       )
       .then((res) => {
         // console.log(res.data);
@@ -37,27 +44,47 @@ function ShowList({ list }) {
   function addNewCard(card) {
     setCards([...cards, card]);
   }
+  console.log(list, "list");
 
   return (
     <div className="bg-list-bg list-container rounded shadow flex flex-col mr-3">
       <div className="flex justify-between items-center px-3 py-2 text-sm text-gray-800">
         {!editListTitle ? (
           <p className="font-bold" onClick={() => setEditListTitle(true)}>
-            {list.name}
+            {listName}
           </p>
         ) : (
           <input
             ref={ref}
             onKeyUp={(event) => {
               if (event.keyCode === 13) {
-                setEditListTitle(false);
+                axios({
+                  method: "PUT",
+                  url: `https://desolate-anchorage-67445.herokuapp.com/api/v1/lists/${list?._id}`,
+                  headers: {
+                    authorization: localStorage.getItem("token"),
+                  },
+                  data: {
+                    list: {
+                      name: listName,
+                      boardId: list.boardId,
+                    },
+                  },
+                })
+                  .then((res) => {
+                    let { list } = res.data;
+                    // setShowList(list);
+                    setEditListTitle(false);
+                  })
+                  .catch((error) => console.log(error));
               }
             }}
             type="text"
             name=""
             id=""
             className="font-bold w-full mr-2 p-2"
-            value="Questions for Next meeting"
+            value={listName}
+            onChange={(event) => setListName(event.target.value)}
           />
         )}
 

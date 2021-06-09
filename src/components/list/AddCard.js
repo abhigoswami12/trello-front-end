@@ -27,6 +27,9 @@ function AddCard({ list, addNewCard }) {
       axios({
         method: "POST",
         url: "https://desolate-anchorage-67445.herokuapp.com/api/v1/cards",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
         data: {
           card: {
             name: values.name,
